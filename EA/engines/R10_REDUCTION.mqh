@@ -5,4 +5,58 @@ bool ReduceDirectionByLots(int direction,double lotsToReduce,double &realizedMon
 bool R10FindProfitFundedPair(int direction,int &profitTicket,double &profitLots,double &profitPerLot,int &lossTicket,double &lossLots,double &lossPerLot){profitTicket=-1;lossTicket=-1;profitLots=0.0;lossLots=0.0;profitPerLot=0.0;lossPerLot=0.0;int type=(direction==OP_BUY?OP_BUY:OP_SELL);double bestProfit=-1.0e100,worstLoss=1.0e100;for(int i=OrdersTotal()-1;i>=0;i--){if(!OrderSelect(i,SELECT_BY_POS,MODE_TRADES))continue;if(!IsEAGOLDOrder()||OrderType()!=type)continue;double lots=OrderLots();if(lots<Lot)continue;double money=OrderProfit()+OrderSwap()+OrderCommission();double perLot=money/lots;if(money>0.0&&money>bestProfit){bestProfit=money;profitTicket=OrderTicket();profitLots=lots;profitPerLot=perLot;}if(money<0.0&&money<worstLoss){worstLoss=money;lossTicket=OrderTicket();lossLots=lots;lossPerLot=perLot;}}return(profitTicket>0&&lossTicket>0&&profitLots>=Lot&&lossLots>=Lot);}
 bool Rule10ProfitFundedPartial(int targetDirection){if(!EnableR10PairReduction||R10PairMinProfit<=0.0)return(false);if(R10PairCooldownSeconds>0&&g_r10LastAction>0&&TimeCurrent()-g_r10LastAction<R10PairCooldownSeconds)return(false);int profitTicket=-1,lossTicket=-1;double profitLots=0.0,lossLots=0.0,profitPerLot=0.0,lossPerLot=0.0;if(!R10FindProfitFundedPair(targetDirection,profitTicket,profitLots,profitPerLot,lossTicket,lossLots,lossPerLot))return(false);double pairLots=NormalizeDouble(MathMin(MathMin(profitLots,lossLots),R10PairMaxLots),DigitsLots);if(pairLots<Lot)return(false);double expectedPairProfit=(profitPerLot+lossPerLot)*pairLots;if(expectedPairProfit<R10PairMinProfit)return(false);double beforeExposure=ExposureLots(),beforeGross=DirectionLots(OP_BUY)+DirectionLots(OP_SELL);double realizedProfit=0.0,realizedLoss=0.0;Print(EA_NAME," RULE 10 PAIR TRIGGER: side=",(targetDirection==OP_BUY?"BUY":"SELL")," profitTicket=",profitTicket," lossTicket=",lossTicket," pairLots=",DoubleToString(pairLots,DigitsLots)," expected=$",DoubleToString(expectedPairProfit,2)," exposure=",DoubleToString(beforeExposure,DigitsLots)," gross=",DoubleToString(beforeGross,DigitsLots));if(!CloseMarketOrderLots(profitTicket,pairLots,realizedProfit))return(false);if(!CloseMarketOrderLots(lossTicket,pairLots,realizedLoss)){Print(EA_NAME," RULE 10 PAIR WARNING: losing-side partial close failed after profitable partial close. Exposure was reduced, but pair was incomplete.");g_r10LastAction=TimeCurrent();return(true);}double afterExposure=ExposureLots(),afterGross=DirectionLots(OP_BUY)+DirectionLots(OP_SELL);double netRealized=realizedProfit+realizedLoss;if(afterExposure>beforeExposure+0.00001){Print(EA_NAME," RULE 10 PAIR SAFETY FAILURE: exposure increased. before=",DoubleToString(beforeExposure,DigitsLots)," after=",DoubleToString(afterExposure,DigitsLots));return(false);}g_r10LastAction=TimeCurrent();Print(EA_NAME," RULE 10 PAIR COMPLETE: side=",(targetDirection==OP_BUY?"BUY":"SELL")," reduced=",DoubleToString(pairLots,DigitsLots)," realized=$",DoubleToString(netRealized,2)," exposure ",DoubleToString(beforeExposure,DigitsLots)," -> ",DoubleToString(afterExposure,DigitsLots)," gross ",DoubleToString(beforeGross,DigitsLots)," -> ",DoubleToString(afterGross,DigitsLots));CreateR10VisualMarker(targetDirection,pairLots,netRealized,beforeExposure,afterExposure,beforeGross,afterGross);CreateEngineActionMarker("R10","REDUCE",targetDirection,pairLots);return(true);}
 bool Rule10Reduce(int targetDirection){if(!EnableR10Reduce||R10MinExposureLots<=0.0)return(false);if(Rule10ProfitFundedPartial(targetDirection))return(true);int opposite=(targetDirection==OP_BUY?OP_SELL:OP_BUY);double targetLots=DirectionLots(targetDirection),oppositeLots=DirectionLots(opposite);double exposure=targetLots-oppositeLots;if(exposure<R10MinExposureLots)return(false);if(oppositeLots<Lot)return(false);if(targetLots<=oppositeLots)return(false);double reduceLots=NormalizeDouble(MathMin(exposure,oppositeLots),DigitsLots);if(reduceLots<R10MinExposureLots)return(false);double beforeExposure=ExposureLots(),beforeGross=targetLots+oppositeLots;double targetRealized=0.0,oppositeRealized=0.0;Print(EA_NAME," RULE 10 TRIGGER: target=",(targetDirection==OP_BUY?"BUY":"SELL")," heavy=",DoubleToString(targetLots,DigitsLots)," light=",DoubleToString(oppositeLots,DigitsLots)," exposure=",DoubleToString(beforeExposure,DigitsLots)," gross=",DoubleToString(beforeGross,DigitsLots)," reduce=",DoubleToString(reduceLots,DigitsLots));if(!ReduceDirectionByLots(targetDirection,reduceLots,targetRealized))return(false);if(!ReduceDirectionByLots(opposite,reduceLots,oppositeRealized)){Print(EA_NAME," RULE 10 WARNING: opposite-side reduction failed. System will not add exposure.");return(false);}double afterExposure=ExposureLots(),afterGross=DirectionLots(OP_BUY)+DirectionLots(OP_SELL);if(afterExposure>beforeExposure+0.00001){Print(EA_NAME," RULE 10 SAFETY FAILURE: exposure increased. before=",DoubleToString(beforeExposure,DigitsLots)," after=",DoubleToString(afterExposure,DigitsLots));return(false);}double totalRealized=targetRealized+oppositeRealized;g_r10LastAction=TimeCurrent();Print(EA_NAME," RULE 10 REDUCE COMPLETE: exposure ",DoubleToString(beforeExposure,DigitsLots)," -> ",DoubleToString(afterExposure,DigitsLots)," gross ",DoubleToString(beforeGross,DigitsLots)," -> ",DoubleToString(afterGross,DigitsLots)," realized=$",DoubleToString(totalRealized,2));CreateR10VisualMarker(targetDirection,reduceLots,totalRealized,beforeExposure,afterExposure,beforeGross,afterGross);CreateEngineActionMarker("R10","REDUCE",targetDirection,reduceLots);return(true);}
+
+//==================================================================
+// EAGOLD CLOCK — SERVER TIME + FIXED GMT-3
+// Integrated here so the existing R10 include activates the clock
+// without requiring a second modification of the monolithic EA.
+//==================================================================
+extern bool EnableEAGOLDClock=true;
+extern int EAGOLDClockX=12;
+extern int EAGOLDClockY=18;
+extern int EAGOLDClockFontSize=10;
+extern color EAGOLDClockColor=clrWhite;
+string EAGOLD_CLOCK_OBJECT="EAGOLD_CLOCK";
+
+void EAGOLDClockUpdate()
+{
+   if(!EnableEAGOLDClock)
+   {
+      if(ObjectFind(0,EAGOLD_CLOCK_OBJECT)>=0) ObjectDelete(0,EAGOLD_CLOCK_OBJECT);
+      return;
+   }
+   datetime serverTime=TimeCurrent();
+   datetime gmt3Time=TimeGMT()-3*60*60;
+   string text="SERVER  "+TimeToString(serverTime,TIME_DATE|TIME_SECONDS)+"   |   GMT-3  "+TimeToString(gmt3Time,TIME_DATE|TIME_SECONDS);
+   if(ObjectFind(0,EAGOLD_CLOCK_OBJECT)<0)
+   {
+      ObjectCreate(0,EAGOLD_CLOCK_OBJECT,OBJ_LABEL,0,0,0);
+      ObjectSetInteger(0,EAGOLD_CLOCK_OBJECT,OBJPROP_CORNER,CORNER_LEFT_UPPER);
+      ObjectSetInteger(0,EAGOLD_CLOCK_OBJECT,OBJPROP_ANCHOR,ANCHOR_LEFT_UPPER);
+      ObjectSetString(0,EAGOLD_CLOCK_OBJECT,OBJPROP_FONT,"Consolas");
+      ObjectSetInteger(0,EAGOLD_CLOCK_OBJECT,OBJPROP_SELECTABLE,false);
+      ObjectSetInteger(0,EAGOLD_CLOCK_OBJECT,OBJPROP_SELECTED,false);
+      ObjectSetInteger(0,EAGOLD_CLOCK_OBJECT,OBJPROP_HIDDEN,true);
+      ObjectSetInteger(0,EAGOLD_CLOCK_OBJECT,OBJPROP_BACK,false);
+   }
+   ObjectSetInteger(0,EAGOLD_CLOCK_OBJECT,OBJPROP_XDISTANCE,EAGOLDClockX);
+   ObjectSetInteger(0,EAGOLD_CLOCK_OBJECT,OBJPROP_YDISTANCE,EAGOLDClockY);
+   ObjectSetInteger(0,EAGOLD_CLOCK_OBJECT,OBJPROP_FONTSIZE,EAGOLDClockFontSize);
+   ObjectSetInteger(0,EAGOLD_CLOCK_OBJECT,OBJPROP_COLOR,EAGOLDClockColor);
+   ObjectSetString(0,EAGOLD_CLOCK_OBJECT,OBJPROP_TEXT,text);
+   ChartRedraw(0);
+}
+
+void EAGOLDClockCleanup()
+{
+   if(ObjectFind(0,EAGOLD_CLOCK_OBJECT)>=0) ObjectDelete(0,EAGOLD_CLOCK_OBJECT);
+}
+
+// Timer handler is intentionally supplied by this included module.
+// MT4 calls it once per second after EventSetTimer(1).
+void OnTimer()
+{
+   EAGOLDClockUpdate();
+}
+
 #endif
