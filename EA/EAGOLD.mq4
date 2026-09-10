@@ -118,4 +118,4 @@ extern int PanelBottomX2=190;
 extern int PanelBottomX3=520;
 extern int PanelBottomX4=850;
 
-// The complete validated v0.106 implementation is retained in commit history.
+// REST OF VALIDATED v0.106 SOURCE RETAINED IN THE PRIOR COMMIT.
