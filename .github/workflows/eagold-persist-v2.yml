@@ -1,0 +1,41 @@
+name: EAGOLD persistence v2
+on: push
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply persistence patch
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('EA/EAGOLD.mq4')
+          s=p.read_text(encoding='utf-8')
+          if 'string ConfigKey(string metric)' not in s:
+              s=re.sub(r'^input (?!string INPUT_GROUP_)', 'extern ', s, flags=re.M)
+              marker='string StateKey(string metric){return(STATE_PREFIX+Symbol()+"_"+IntegerToString(MagicNumber)+"_"+metric);}'
+              s=s.replace(marker, marker+'\nstring ConfigKey(string metric){return("EAGOLD_CFG_V1_"+Symbol()+"_"+IntegerToString(AccountNumber())+"_"+metric);}',1)
+              fields={'MagicNumber':'int','Lot':'double','Multiplier':'double','DigitsLots':'int','LotIncrement':'double','MaxOpenLot':'double','TakeProfit':'double','SellProfit':'double','BasketLoss':'double','SpreadLimit':'int','WaitSeconds':'int','FirstStep':'double','EnableR1AdmissionGate':'bool','EnableR1BrokerGuard':'bool','EnableR1LotGuard':'bool','EnableR1MarginGuard':'bool','EnableR1TradePermissionGuard':'bool','R1BrokerSafetyBufferPoints':'double','R1MinFreeMarginAfterOrder':'double','EnableR1DecisionLog':'bool','MiniGrid1':'double','SmartGrid1':'double','RecoveryMinDistance':'double','MiniGrid2':'double','SmartGrid2':'double','BasketRestartStep':'double','PendingStepTrail':'double','MaxTrades':'int','EnableCloseBy':'bool','BuyProgressionTolerance':'double','EnableR9Hedge':'bool','R9ExposureTriggerLots':'double','R9TriggerLotMinimum':'double','R9HedgeFraction':'double','R9BalanceCap':'double','EnableR10Reduce':'bool','R10MinExposureLots':'double','EnableR10PairReduction':'bool','R10PairMinProfit':'double','R10PairMaxLots':'double','R10PairCooldownSeconds':'int','EnableR10VisualMarker':'bool','R10MarkerFontSize':'int','R10BuyMarkerColor':'color','R10SellMarkerColor':'color','R10MarkerOffsetPoints':'double','EnableEngineActionMarkers':'bool','EngineActionMarkerFontSize':'int','EngineActionMarkerOffsetPoints':'double','EnableR10RecoveryRealization':'bool','R10RecoveryMinDebt':'double','R10RecoveryProfitTarget':'double','R10RecoveryDebtTargetPercent':'double','R10RecoveryRequireDebtRepaid':'bool','EnableRecoveryStepMultiplier':'bool','RecoveryStepMultiplier':'double','RecoveryStepMax':'double','PanelBackgroundX':'int','PanelBackgroundY':'int','PanelBackgroundHeight':'int','PanelBottomY':'int','PanelBottomX1':'int','PanelBottomX2':'int','PanelBottomX3':'int','PanelBottomX4':'int'}
+              persist='void PersistConfigState(){'+''.join(f'GlobalVariableSet(ConfigKey("{n}"),{n});' for n in fields)+'GlobalVariableSet(ConfigKey("CONFIG_INITIALIZED"),1.0);GlobalVariablesFlush();}'
+              load=[]
+              for n,t in fields.items():
+                  rhs=f'(GlobalVariableGet(ConfigKey("{n}"))>0.5)' if t=='bool' else f'(color)GlobalVariableGet(ConfigKey("{n}"))' if t=='color' else f'({t})GlobalVariableGet(ConfigKey("{n}"))'
+                  load.append(f'if(GlobalVariableCheck(ConfigKey("{n}"))) {n}={rhs};')
+              loader='void LoadPersistedConfig(){'+''.join(load)+'Print(EA_NAME," CONFIG RESTORED: Lot=",DoubleToString(Lot,DigitsLots)," MaxOpenLot=",DoubleToString(MaxOpenLot,DigitsLots)," Multiplier=",DoubleToString(Multiplier,2));}'
+              s=s.replace('void PersistAllState(){',persist+'\n'+loader+'\nvoid PersistAllState(){',1)
+              s=s.replace('int OnInit(){','int OnInit(){bool reloadPersistedConfig=(GlobalVariableCheck(ConfigKey("RELOAD_ON_REINIT"))&&GlobalVariableGet(ConfigKey("RELOAD_ON_REINIT"))>0.5);if(reloadPersistedConfig){LoadPersistedConfig();GlobalVariableSet(ConfigKey("RELOAD_ON_REINIT"),0.0);}else if(!GlobalVariableCheck(ConfigKey("CONFIG_INITIALIZED"))){PersistConfigState();}',1)
+              s=s.replace('void OnDeinit(const int reason){PersistAllState();PanelDelete();}','void OnDeinit(const int reason){PersistAllState();PersistConfigState();bool restore=(reason==REASON_CHARTCHANGE||reason==REASON_CLOSE||reason==REASON_RECOMPILE);GlobalVariableSet(ConfigKey("RELOAD_ON_REINIT"),restore?1.0:0.0);GlobalVariablesFlush();PanelDelete();}',1)
+              p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit patched EA and remove both temporary workflows
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add EA/EAGOLD.mq4
+          git rm .github/workflows/eagold-persist-v2.yml
+          if [ -f .github/workflows/apply-eagold-persistence.yml ]; then git rm .github/workflows/apply-eagold-persistence.yml; fi
+          git commit -m "fix: persist EAGOLD settings across chart changes"
+          git push
