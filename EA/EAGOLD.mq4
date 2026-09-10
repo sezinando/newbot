@@ -6,117 +6,117 @@
 // GENERAL / IDENTITY
 //==================================================================
 input string INPUT_GROUP_GENERAL="=== GENERAL / IDENTITY ===";
-input int MagicNumber=3001;
+extern int MagicNumber=3001;
 
 //==================================================================
 // CORE MONEY / LOT PROGRESSION
 //==================================================================
 input string INPUT_GROUP_MONEY="=== CORE MONEY / LOT PROGRESSION ===";
-input double Lot=0.01;
-input double Multiplier=1.10;
-input int DigitsLots=2;
-input double LotIncrement=0.02;
-input double MaxOpenLot=3.00;
-input double TakeProfit=5.00;
-input double SellProfit=30.00;
-input double BasketLoss=100.00;
-input int SpreadLimit=100;
-input int WaitSeconds=0;
+extern double Lot=0.01;
+extern double Multiplier=1.10;
+extern int DigitsLots=2;
+extern double LotIncrement=0.02;
+extern double MaxOpenLot=3.00;
+extern double TakeProfit=5.00;
+extern double SellProfit=30.00;
+extern double BasketLoss=100.00;
+extern int SpreadLimit=100;
+extern int WaitSeconds=0;
 
 //==================================================================
 // R1 — FIRST ENGINE / CORE
 //==================================================================
 input string INPUT_GROUP_R1_CORE="=== R1 FIRST ENGINE / CORE ===";
-input double FirstStep=160.0;
+extern double FirstStep=160.0;
 
 //==================================================================
 // R1.1 — FIRST ADMISSION CONTROL
 //==================================================================
 input string INPUT_GROUP_R1_ADMISSION="=== R1.1 FIRST ADMISSION CONTROL ===";
-input bool EnableR1AdmissionGate=false;
-input bool EnableR1BrokerGuard=false;
-input bool EnableR1LotGuard=false;
-input bool EnableR1MarginGuard=false;
-input bool EnableR1TradePermissionGuard=false;
-input double R1BrokerSafetyBufferPoints=0.0;
-input double R1MinFreeMarginAfterOrder=0.0;
-input bool EnableR1DecisionLog=true;
+extern bool EnableR1AdmissionGate=false;
+extern bool EnableR1BrokerGuard=false;
+extern bool EnableR1LotGuard=false;
+extern bool EnableR1MarginGuard=false;
+extern bool EnableR1TradePermissionGuard=false;
+extern double R1BrokerSafetyBufferPoints=0.0;
+extern double R1MinFreeMarginAfterOrder=0.0;
+extern bool EnableR1DecisionLog=true;
 
 //==================================================================
 // R4 / R5 / R7 — EXISTING LIFECYCLE RULES
 //==================================================================
 input string INPUT_GROUP_LIFECYCLE="=== R4 / R5 / R7 LIFECYCLE ===";
-input double MiniGrid1=320.0;
-input double SmartGrid1=280.0;
-input double RecoveryMinDistance=340.0;
-input double MiniGrid2=80.0;
-input double SmartGrid2=60.0;
-input double PendingStepTrail=50.0;
-input double BasketRestartStep=160.0;
-input int MaxTrades=2000;
-input bool EnableCloseBy=true;
-input double BuyProgressionTolerance=10.0;
+extern double MiniGrid1=320.0;
+extern double SmartGrid1=280.0;
+extern double RecoveryMinDistance=340.0;
+extern double MiniGrid2=80.0;
+extern double SmartGrid2=60.0;
+extern double PendingStepTrail=50.0;
+extern double BasketRestartStep=160.0;
+extern int MaxTrades=2000;
+extern bool EnableCloseBy=true;
+extern double BuyProgressionTolerance=10.0;
 
 //==================================================================
 // R9 — EXPOSURE CONTROLLER
 //==================================================================
 input string INPUT_GROUP_R9="=== R9 EXPOSURE CONTROLLER ===";
-input bool EnableR9Hedge=true;
-input double R9ExposureTriggerLots=1.00;
-input double R9TriggerLotMinimum=0.00;
-input double R9HedgeFraction=0.6666666667;
-input double R9BalanceCap=0.50;
+extern bool EnableR9Hedge=true;
+extern double R9ExposureTriggerLots=1.00;
+extern double R9TriggerLotMinimum=0.00;
+extern double R9HedgeFraction=0.6666666667;
+extern double R9BalanceCap=0.50;
 
 //==================================================================
 // R10 — EXPOSURE REDUCTION
 //==================================================================
 input string INPUT_GROUP_R10="=== R10 EXPOSURE REDUCTION ===";
-input bool EnableR10Reduce=true;
-input double R10MinExposureLots=0.01;
-input bool EnableR10PairReduction=true;
-input double R10PairMinProfit=5.00;
-input double R10PairMaxLots=1.00;
-input int R10PairCooldownSeconds=30;
-input bool EnableR10VisualMarker=true;
-input string R10MarkerFont="Arial Bold";
-input int R10MarkerFontSize=9;
-input color R10BuyMarkerColor=clrLime;
-input color R10SellMarkerColor=clrTomato;
-input double R10MarkerOffsetPoints=25.0;
-input bool EnableEngineActionMarkers=true;
-input int EngineActionMarkerFontSize=8;
-input double EngineActionMarkerOffsetPoints=18.0;
+extern bool EnableR10Reduce=true;
+extern double R10MinExposureLots=0.01;
+extern bool EnableR10PairReduction=true;
+extern double R10PairMinProfit=5.00;
+extern double R10PairMaxLots=1.00;
+extern int R10PairCooldownSeconds=30;
+extern bool EnableR10VisualMarker=true;
+extern string R10MarkerFont="Arial Bold";
+extern int R10MarkerFontSize=9;
+extern color R10BuyMarkerColor=clrLime;
+extern color R10SellMarkerColor=clrTomato;
+extern double R10MarkerOffsetPoints=25.0;
+extern bool EnableEngineActionMarkers=true;
+extern int EngineActionMarkerFontSize=8;
+extern double EngineActionMarkerOffsetPoints=18.0;
 
 //==================================================================
 // R10.2 — RECOVERY REALIZATION
 //==================================================================
 input string INPUT_GROUP_R102="=== R10.2 RECOVERY REALIZATION ===";
-input bool EnableR10RecoveryRealization=false;
-input double R10RecoveryMinDebt=100.0;
-input double R10RecoveryProfitTarget=50.0;
-input double R10RecoveryDebtTargetPercent=0.0;
-input bool R10RecoveryRequireDebtRepaid=true;
+extern bool EnableR10RecoveryRealization=false;
+extern double R10RecoveryMinDebt=100.0;
+extern double R10RecoveryProfitTarget=50.0;
+extern double R10RecoveryDebtTargetPercent=0.0;
+extern bool R10RecoveryRequireDebtRepaid=true;
 
 //==================================================================
 // R11 — RECOVERY STEP CONTROL
 //==================================================================
 input string INPUT_GROUP_R11="=== R11 RECOVERY STEP CONTROL ===";
-input bool EnableRecoveryStepMultiplier=true;
-input double RecoveryStepMultiplier=1.15;
-input double RecoveryStepMax=500.0;
+extern bool EnableRecoveryStepMultiplier=true;
+extern double RecoveryStepMultiplier=1.15;
+extern double RecoveryStepMax=500.0;
 
 //==================================================================
 // UI / PANEL
 //==================================================================
 input string INPUT_GROUP_UI="=== UI / PANEL ===";
-input int PanelBackgroundX=260;
-input int PanelBackgroundY=8;
-input int PanelBackgroundHeight=450;
-input int PanelBottomY=8;
-input int PanelBottomX1=15;
-input int PanelBottomX2=190;
-input int PanelBottomX3=520;
-input int PanelBottomX4=850;
+extern int PanelBackgroundX=260;
+extern int PanelBackgroundY=8;
+extern int PanelBackgroundHeight=450;
+extern int PanelBottomY=8;
+extern int PanelBottomX1=15;
+extern int PanelBottomX2=190;
+extern int PanelBottomX3=520;
+extern int PanelBottomX4=850;
 
 string EA_NAME="EAGOLD";
 string PANEL_PREFIX="EAGOLD_BT_";
@@ -176,6 +176,9 @@ bool R1MarginGuard(int direction,double lots,string &reason){int marketType=(dir
 bool R1AdmissionAllowed(int direction,double lots,double price,string &reason){reason="PASS";if(!EnableR1AdmissionGate){R1Decision("DISABLED","MASTER_OFF");return(true);}string localReason="PASS";if(EnableR1TradePermissionGuard){if(!R1TradePermissionGuard(localReason)){reason=localReason;R1Decision("BLOCK",reason);return(false);}}if(EnableR1BrokerGuard){if(!R1BrokerGuard(direction,price,localReason)){reason=localReason;R1Decision("BLOCK",reason);return(false);}}if(EnableR1LotGuard){if(!R1ValidateLot(lots,localReason)){reason=localReason;R1Decision("BLOCK",reason);return(false);}}if(EnableR1MarginGuard){if(!R1MarginGuard(direction,lots,localReason)){reason=localReason;R1Decision("BLOCK",reason);return(false);}}R1Decision("ALLOW","ALL_ENABLED_GATES_PASS");return(true);}
 
 string StateKey(string metric){return(STATE_PREFIX+Symbol()+"_"+IntegerToString(MagicNumber)+"_"+metric);}
+string ConfigKey(string metric){return("EAGOLD_CFG_V1_"+Symbol()+"_"+IntegerToString(AccountNumber())+"_"+metric);}
+void PersistConfigState(){GlobalVariableSet(ConfigKey("MagicNumber"),MagicNumber);GlobalVariableSet(ConfigKey("Lot"),Lot);GlobalVariableSet(ConfigKey("Multiplier"),Multiplier);GlobalVariableSet(ConfigKey("DigitsLots"),DigitsLots);GlobalVariableSet(ConfigKey("LotIncrement"),LotIncrement);GlobalVariableSet(ConfigKey("MaxOpenLot"),MaxOpenLot);GlobalVariableSet(ConfigKey("TakeProfit"),TakeProfit);GlobalVariableSet(ConfigKey("SellProfit"),SellProfit);GlobalVariableSet(ConfigKey("BasketLoss"),BasketLoss);GlobalVariableSet(ConfigKey("SpreadLimit"),SpreadLimit);GlobalVariableSet(ConfigKey("WaitSeconds"),WaitSeconds);GlobalVariableSet(ConfigKey("FirstStep"),FirstStep);GlobalVariableSet(ConfigKey("EnableR1AdmissionGate"),EnableR1AdmissionGate);GlobalVariableSet(ConfigKey("EnableR1BrokerGuard"),EnableR1BrokerGuard);GlobalVariableSet(ConfigKey("EnableR1LotGuard"),EnableR1LotGuard);GlobalVariableSet(ConfigKey("EnableR1MarginGuard"),EnableR1MarginGuard);GlobalVariableSet(ConfigKey("EnableR1TradePermissionGuard"),EnableR1TradePermissionGuard);GlobalVariableSet(ConfigKey("R1BrokerSafetyBufferPoints"),R1BrokerSafetyBufferPoints);GlobalVariableSet(ConfigKey("R1MinFreeMarginAfterOrder"),R1MinFreeMarginAfterOrder);GlobalVariableSet(ConfigKey("EnableR1DecisionLog"),EnableR1DecisionLog);GlobalVariableSet(ConfigKey("MiniGrid1"),MiniGrid1);GlobalVariableSet(ConfigKey("SmartGrid1"),SmartGrid1);GlobalVariableSet(ConfigKey("RecoveryMinDistance"),RecoveryMinDistance);GlobalVariableSet(ConfigKey("MiniGrid2"),MiniGrid2);GlobalVariableSet(ConfigKey("SmartGrid2"),SmartGrid2);GlobalVariableSet(ConfigKey("BasketRestartStep"),BasketRestartStep);GlobalVariableSet(ConfigKey("PendingStepTrail"),PendingStepTrail);GlobalVariableSet(ConfigKey("MaxTrades"),MaxTrades);GlobalVariableSet(ConfigKey("EnableCloseBy"),EnableCloseBy);GlobalVariableSet(ConfigKey("BuyProgressionTolerance"),BuyProgressionTolerance);GlobalVariableSet(ConfigKey("EnableR9Hedge"),EnableR9Hedge);GlobalVariableSet(ConfigKey("R9ExposureTriggerLots"),R9ExposureTriggerLots);GlobalVariableSet(ConfigKey("R9TriggerLotMinimum"),R9TriggerLotMinimum);GlobalVariableSet(ConfigKey("R9HedgeFraction"),R9HedgeFraction);GlobalVariableSet(ConfigKey("R9BalanceCap"),R9BalanceCap);GlobalVariableSet(ConfigKey("EnableR10Reduce"),EnableR10Reduce);GlobalVariableSet(ConfigKey("R10MinExposureLots"),R10MinExposureLots);GlobalVariableSet(ConfigKey("EnableR10PairReduction"),EnableR10PairReduction);GlobalVariableSet(ConfigKey("R10PairMinProfit"),R10PairMinProfit);GlobalVariableSet(ConfigKey("R10PairMaxLots"),R10PairMaxLots);GlobalVariableSet(ConfigKey("R10PairCooldownSeconds"),R10PairCooldownSeconds);GlobalVariableSet(ConfigKey("EnableR10VisualMarker"),EnableR10VisualMarker);GlobalVariableSet(ConfigKey("R10MarkerFontSize"),R10MarkerFontSize);GlobalVariableSet(ConfigKey("R10BuyMarkerColor"),R10BuyMarkerColor);GlobalVariableSet(ConfigKey("R10SellMarkerColor"),R10SellMarkerColor);GlobalVariableSet(ConfigKey("R10MarkerOffsetPoints"),R10MarkerOffsetPoints);GlobalVariableSet(ConfigKey("EnableEngineActionMarkers"),EnableEngineActionMarkers);GlobalVariableSet(ConfigKey("EngineActionMarkerFontSize"),EngineActionMarkerFontSize);GlobalVariableSet(ConfigKey("EngineActionMarkerOffsetPoints"),EngineActionMarkerOffsetPoints);GlobalVariableSet(ConfigKey("EnableR10RecoveryRealization"),EnableR10RecoveryRealization);GlobalVariableSet(ConfigKey("R10RecoveryMinDebt"),R10RecoveryMinDebt);GlobalVariableSet(ConfigKey("R10RecoveryProfitTarget"),R10RecoveryProfitTarget);GlobalVariableSet(ConfigKey("R10RecoveryDebtTargetPercent"),R10RecoveryDebtTargetPercent);GlobalVariableSet(ConfigKey("R10RecoveryRequireDebtRepaid"),R10RecoveryRequireDebtRepaid);GlobalVariableSet(ConfigKey("EnableRecoveryStepMultiplier"),EnableRecoveryStepMultiplier);GlobalVariableSet(ConfigKey("RecoveryStepMultiplier"),RecoveryStepMultiplier);GlobalVariableSet(ConfigKey("RecoveryStepMax"),RecoveryStepMax);GlobalVariableSet(ConfigKey("PanelBackgroundX"),PanelBackgroundX);GlobalVariableSet(ConfigKey("PanelBackgroundY"),PanelBackgroundY);GlobalVariableSet(ConfigKey("PanelBackgroundHeight"),PanelBackgroundHeight);GlobalVariableSet(ConfigKey("PanelBottomY"),PanelBottomY);GlobalVariableSet(ConfigKey("PanelBottomX1"),PanelBottomX1);GlobalVariableSet(ConfigKey("PanelBottomX2"),PanelBottomX2);GlobalVariableSet(ConfigKey("PanelBottomX3"),PanelBottomX3);GlobalVariableSet(ConfigKey("PanelBottomX4"),PanelBottomX4);GlobalVariableSet(ConfigKey("CONFIG_INITIALIZED"),1.0);GlobalVariablesFlush();}
+void LoadPersistedConfig(){if(GlobalVariableCheck(ConfigKey("MagicNumber"))) MagicNumber=(int)GlobalVariableGet(ConfigKey("MagicNumber"));if(GlobalVariableCheck(ConfigKey("Lot"))) Lot=(double)GlobalVariableGet(ConfigKey("Lot"));if(GlobalVariableCheck(ConfigKey("Multiplier"))) Multiplier=(double)GlobalVariableGet(ConfigKey("Multiplier"));if(GlobalVariableCheck(ConfigKey("DigitsLots"))) DigitsLots=(int)GlobalVariableGet(ConfigKey("DigitsLots"));if(GlobalVariableCheck(ConfigKey("LotIncrement"))) LotIncrement=(double)GlobalVariableGet(ConfigKey("LotIncrement"));if(GlobalVariableCheck(ConfigKey("MaxOpenLot"))) MaxOpenLot=(double)GlobalVariableGet(ConfigKey("MaxOpenLot"));if(GlobalVariableCheck(ConfigKey("TakeProfit"))) TakeProfit=(double)GlobalVariableGet(ConfigKey("TakeProfit"));if(GlobalVariableCheck(ConfigKey("SellProfit"))) SellProfit=(double)GlobalVariableGet(ConfigKey("SellProfit"));if(GlobalVariableCheck(ConfigKey("BasketLoss"))) BasketLoss=(double)GlobalVariableGet(ConfigKey("BasketLoss"));if(GlobalVariableCheck(ConfigKey("SpreadLimit"))) SpreadLimit=(int)GlobalVariableGet(ConfigKey("SpreadLimit"));if(GlobalVariableCheck(ConfigKey("WaitSeconds"))) WaitSeconds=(int)GlobalVariableGet(ConfigKey("WaitSeconds"));if(GlobalVariableCheck(ConfigKey("FirstStep"))) FirstStep=(double)GlobalVariableGet(ConfigKey("FirstStep"));if(GlobalVariableCheck(ConfigKey("EnableR1AdmissionGate"))) EnableR1AdmissionGate=(GlobalVariableGet(ConfigKey("EnableR1AdmissionGate"))>0.5);if(GlobalVariableCheck(ConfigKey("EnableR1BrokerGuard"))) EnableR1BrokerGuard=(GlobalVariableGet(ConfigKey("EnableR1BrokerGuard"))>0.5);if(GlobalVariableCheck(ConfigKey("EnableR1LotGuard"))) EnableR1LotGuard=(GlobalVariableGet(ConfigKey("EnableR1LotGuard"))>0.5);if(GlobalVariableCheck(ConfigKey("EnableR1MarginGuard"))) EnableR1MarginGuard=(GlobalVariableGet(ConfigKey("EnableR1MarginGuard"))>0.5);if(GlobalVariableCheck(ConfigKey("EnableR1TradePermissionGuard"))) EnableR1TradePermissionGuard=(GlobalVariableGet(ConfigKey("EnableR1TradePermissionGuard"))>0.5);if(GlobalVariableCheck(ConfigKey("R1BrokerSafetyBufferPoints"))) R1BrokerSafetyBufferPoints=(double)GlobalVariableGet(ConfigKey("R1BrokerSafetyBufferPoints"));if(GlobalVariableCheck(ConfigKey("R1MinFreeMarginAfterOrder"))) R1MinFreeMarginAfterOrder=(double)GlobalVariableGet(ConfigKey("R1MinFreeMarginAfterOrder"));if(GlobalVariableCheck(ConfigKey("EnableR1DecisionLog"))) EnableR1DecisionLog=(GlobalVariableGet(ConfigKey("EnableR1DecisionLog"))>0.5);if(GlobalVariableCheck(ConfigKey("MiniGrid1"))) MiniGrid1=(double)GlobalVariableGet(ConfigKey("MiniGrid1"));if(GlobalVariableCheck(ConfigKey("SmartGrid1"))) SmartGrid1=(double)GlobalVariableGet(ConfigKey("SmartGrid1"));if(GlobalVariableCheck(ConfigKey("RecoveryMinDistance"))) RecoveryMinDistance=(double)GlobalVariableGet(ConfigKey("RecoveryMinDistance"));if(GlobalVariableCheck(ConfigKey("MiniGrid2"))) MiniGrid2=(double)GlobalVariableGet(ConfigKey("MiniGrid2"));if(GlobalVariableCheck(ConfigKey("SmartGrid2"))) SmartGrid2=(double)GlobalVariableGet(ConfigKey("SmartGrid2"));if(GlobalVariableCheck(ConfigKey("BasketRestartStep"))) BasketRestartStep=(double)GlobalVariableGet(ConfigKey("BasketRestartStep"));if(GlobalVariableCheck(ConfigKey("PendingStepTrail"))) PendingStepTrail=(double)GlobalVariableGet(ConfigKey("PendingStepTrail"));if(GlobalVariableCheck(ConfigKey("MaxTrades"))) MaxTrades=(int)GlobalVariableGet(ConfigKey("MaxTrades"));if(GlobalVariableCheck(ConfigKey("EnableCloseBy"))) EnableCloseBy=(GlobalVariableGet(ConfigKey("EnableCloseBy"))>0.5);if(GlobalVariableCheck(ConfigKey("BuyProgressionTolerance"))) BuyProgressionTolerance=(double)GlobalVariableGet(ConfigKey("BuyProgressionTolerance"));if(GlobalVariableCheck(ConfigKey("EnableR9Hedge"))) EnableR9Hedge=(GlobalVariableGet(ConfigKey("EnableR9Hedge"))>0.5);if(GlobalVariableCheck(ConfigKey("R9ExposureTriggerLots"))) R9ExposureTriggerLots=(double)GlobalVariableGet(ConfigKey("R9ExposureTriggerLots"));if(GlobalVariableCheck(ConfigKey("R9TriggerLotMinimum"))) R9TriggerLotMinimum=(double)GlobalVariableGet(ConfigKey("R9TriggerLotMinimum"));if(GlobalVariableCheck(ConfigKey("R9HedgeFraction"))) R9HedgeFraction=(double)GlobalVariableGet(ConfigKey("R9HedgeFraction"));if(GlobalVariableCheck(ConfigKey("R9BalanceCap"))) R9BalanceCap=(double)GlobalVariableGet(ConfigKey("R9BalanceCap"));if(GlobalVariableCheck(ConfigKey("EnableR10Reduce"))) EnableR10Reduce=(GlobalVariableGet(ConfigKey("EnableR10Reduce"))>0.5);if(GlobalVariableCheck(ConfigKey("R10MinExposureLots"))) R10MinExposureLots=(double)GlobalVariableGet(ConfigKey("R10MinExposureLots"));if(GlobalVariableCheck(ConfigKey("EnableR10PairReduction"))) EnableR10PairReduction=(GlobalVariableGet(ConfigKey("EnableR10PairReduction"))>0.5);if(GlobalVariableCheck(ConfigKey("R10PairMinProfit"))) R10PairMinProfit=(double)GlobalVariableGet(ConfigKey("R10PairMinProfit"));if(GlobalVariableCheck(ConfigKey("R10PairMaxLots"))) R10PairMaxLots=(double)GlobalVariableGet(ConfigKey("R10PairMaxLots"));if(GlobalVariableCheck(ConfigKey("R10PairCooldownSeconds"))) R10PairCooldownSeconds=(int)GlobalVariableGet(ConfigKey("R10PairCooldownSeconds"));if(GlobalVariableCheck(ConfigKey("EnableR10VisualMarker"))) EnableR10VisualMarker=(GlobalVariableGet(ConfigKey("EnableR10VisualMarker"))>0.5);if(GlobalVariableCheck(ConfigKey("R10MarkerFontSize"))) R10MarkerFontSize=(int)GlobalVariableGet(ConfigKey("R10MarkerFontSize"));if(GlobalVariableCheck(ConfigKey("R10BuyMarkerColor"))) R10BuyMarkerColor=(color)GlobalVariableGet(ConfigKey("R10BuyMarkerColor"));if(GlobalVariableCheck(ConfigKey("R10SellMarkerColor"))) R10SellMarkerColor=(color)GlobalVariableGet(ConfigKey("R10SellMarkerColor"));if(GlobalVariableCheck(ConfigKey("R10MarkerOffsetPoints"))) R10MarkerOffsetPoints=(double)GlobalVariableGet(ConfigKey("R10MarkerOffsetPoints"));if(GlobalVariableCheck(ConfigKey("EnableEngineActionMarkers"))) EnableEngineActionMarkers=(GlobalVariableGet(ConfigKey("EnableEngineActionMarkers"))>0.5);if(GlobalVariableCheck(ConfigKey("EngineActionMarkerFontSize"))) EngineActionMarkerFontSize=(int)GlobalVariableGet(ConfigKey("EngineActionMarkerFontSize"));if(GlobalVariableCheck(ConfigKey("EngineActionMarkerOffsetPoints"))) EngineActionMarkerOffsetPoints=(double)GlobalVariableGet(ConfigKey("EngineActionMarkerOffsetPoints"));if(GlobalVariableCheck(ConfigKey("EnableR10RecoveryRealization"))) EnableR10RecoveryRealization=(GlobalVariableGet(ConfigKey("EnableR10RecoveryRealization"))>0.5);if(GlobalVariableCheck(ConfigKey("R10RecoveryMinDebt"))) R10RecoveryMinDebt=(double)GlobalVariableGet(ConfigKey("R10RecoveryMinDebt"));if(GlobalVariableCheck(ConfigKey("R10RecoveryProfitTarget"))) R10RecoveryProfitTarget=(double)GlobalVariableGet(ConfigKey("R10RecoveryProfitTarget"));if(GlobalVariableCheck(ConfigKey("R10RecoveryDebtTargetPercent"))) R10RecoveryDebtTargetPercent=(double)GlobalVariableGet(ConfigKey("R10RecoveryDebtTargetPercent"));if(GlobalVariableCheck(ConfigKey("R10RecoveryRequireDebtRepaid"))) R10RecoveryRequireDebtRepaid=(GlobalVariableGet(ConfigKey("R10RecoveryRequireDebtRepaid"))>0.5);if(GlobalVariableCheck(ConfigKey("EnableRecoveryStepMultiplier"))) EnableRecoveryStepMultiplier=(GlobalVariableGet(ConfigKey("EnableRecoveryStepMultiplier"))>0.5);if(GlobalVariableCheck(ConfigKey("RecoveryStepMultiplier"))) RecoveryStepMultiplier=(double)GlobalVariableGet(ConfigKey("RecoveryStepMultiplier"));if(GlobalVariableCheck(ConfigKey("RecoveryStepMax"))) RecoveryStepMax=(double)GlobalVariableGet(ConfigKey("RecoveryStepMax"));if(GlobalVariableCheck(ConfigKey("PanelBackgroundX"))) PanelBackgroundX=(int)GlobalVariableGet(ConfigKey("PanelBackgroundX"));if(GlobalVariableCheck(ConfigKey("PanelBackgroundY"))) PanelBackgroundY=(int)GlobalVariableGet(ConfigKey("PanelBackgroundY"));if(GlobalVariableCheck(ConfigKey("PanelBackgroundHeight"))) PanelBackgroundHeight=(int)GlobalVariableGet(ConfigKey("PanelBackgroundHeight"));if(GlobalVariableCheck(ConfigKey("PanelBottomY"))) PanelBottomY=(int)GlobalVariableGet(ConfigKey("PanelBottomY"));if(GlobalVariableCheck(ConfigKey("PanelBottomX1"))) PanelBottomX1=(int)GlobalVariableGet(ConfigKey("PanelBottomX1"));if(GlobalVariableCheck(ConfigKey("PanelBottomX2"))) PanelBottomX2=(int)GlobalVariableGet(ConfigKey("PanelBottomX2"));if(GlobalVariableCheck(ConfigKey("PanelBottomX3"))) PanelBottomX3=(int)GlobalVariableGet(ConfigKey("PanelBottomX3"));if(GlobalVariableCheck(ConfigKey("PanelBottomX4"))) PanelBottomX4=(int)GlobalVariableGet(ConfigKey("PanelBottomX4"));Print(EA_NAME," CONFIG RESTORED: Lot=",DoubleToString(Lot,DigitsLots)," MaxOpenLot=",DoubleToString(MaxOpenLot,DigitsLots)," Multiplier=",DoubleToString(Multiplier,2)," RecoveryMinDistance=",DoubleToString(RecoveryMinDistance,1)," RecoveryStepMultiplier=",DoubleToString(RecoveryStepMultiplier,2));}
 void PersistAllState(){GlobalVariableSet(StateKey("MagicNumber"),MagicNumber);GlobalVariableSet(StateKey("Lot"),Lot);GlobalVariableSet(StateKey("Multiplier"),Multiplier);GlobalVariableSet(StateKey("DigitsLots"),DigitsLots);GlobalVariableSet(StateKey("LotIncrement"),LotIncrement);GlobalVariableSet(StateKey("MaxOpenLot"),MaxOpenLot);GlobalVariableSet(StateKey("TakeProfit"),TakeProfit);GlobalVariableSet(StateKey("SellProfit"),SellProfit);GlobalVariableSet(StateKey("BasketLoss"),BasketLoss);GlobalVariableSet(StateKey("SpreadLimit"),SpreadLimit);GlobalVariableSet(StateKey("WaitSeconds"),WaitSeconds);GlobalVariableSet(StateKey("FirstStep"),FirstStep);GlobalVariableSet(StateKey("MiniGrid1"),MiniGrid1);GlobalVariableSet(StateKey("SmartGrid1"),SmartGrid1);GlobalVariableSet(StateKey("RecoveryMinDistance"),RecoveryMinDistance);GlobalVariableSet(StateKey("MiniGrid2"),MiniGrid2);GlobalVariableSet(StateKey("SmartGrid2"),SmartGrid2);GlobalVariableSet(StateKey("PendingStepTrail"),PendingStepTrail);GlobalVariableSet(StateKey("BasketRestartStep"),BasketRestartStep);GlobalVariableSet(StateKey("MaxTrades"),MaxTrades);GlobalVariableSet(StateKey("EnableCloseBy"),EnableCloseBy?1.0:0.0);GlobalVariableSet(StateKey("BuyProgressionTolerance"),BuyProgressionTolerance);GlobalVariableSet(StateKey("EnableR9Hedge"),EnableR9Hedge?1.0:0.0);GlobalVariableSet(StateKey("R9ExposureTriggerLots"),R9ExposureTriggerLots);GlobalVariableSet(StateKey("R9TriggerLotMinimum"),R9TriggerLotMinimum);GlobalVariableSet(StateKey("R9HedgeFraction"),R9HedgeFraction);GlobalVariableSet(StateKey("R9BalanceCap"),R9BalanceCap);GlobalVariableSet(StateKey("EnableR10Reduce"),EnableR10Reduce?1.0:0.0);GlobalVariableSet(StateKey("R10MinExposureLots"),R10MinExposureLots);GlobalVariableSet(StateKey("EnableR10PairReduction"),EnableR10PairReduction?1.0:0.0);GlobalVariableSet(StateKey("R10PairMinProfit"),R10PairMinProfit);GlobalVariableSet(StateKey("R10PairMaxLots"),R10PairMaxLots);GlobalVariableSet(StateKey("R10PairCooldownSeconds"),R10PairCooldownSeconds);GlobalVariableSet(StateKey("EnableR10VisualMarker"),EnableR10VisualMarker?1.0:0.0);GlobalVariableSet(StateKey("R10MarkerFontSize"),R10MarkerFontSize);GlobalVariableSet(StateKey("R10BuyMarkerColor"),(double)R10BuyMarkerColor);GlobalVariableSet(StateKey("R10SellMarkerColor"),(double)R10SellMarkerColor);GlobalVariableSet(StateKey("R10MarkerOffsetPoints"),R10MarkerOffsetPoints);GlobalVariableSet(StateKey("EnableEngineActionMarkers"),EnableEngineActionMarkers?1.0:0.0);GlobalVariableSet(StateKey("EngineActionMarkerFontSize"),EngineActionMarkerFontSize);GlobalVariableSet(StateKey("EngineActionMarkerOffsetPoints"),EngineActionMarkerOffsetPoints);GlobalVariableSet(StateKey("EnableR10RecoveryRealization"),EnableR10RecoveryRealization?1.0:0.0);GlobalVariableSet(StateKey("R10RecoveryMinDebt"),R10RecoveryMinDebt);GlobalVariableSet(StateKey("R10RecoveryProfitTarget"),R10RecoveryProfitTarget);GlobalVariableSet(StateKey("R10RecoveryDebtTargetPercent"),R10RecoveryDebtTargetPercent);GlobalVariableSet(StateKey("R10RecoveryRequireDebtRepaid"),R10RecoveryRequireDebtRepaid?1.0:0.0);GlobalVariableSet(StateKey("g_r10RecoveryCycleActive"),g_r10RecoveryCycleActive?1.0:0.0);GlobalVariableSet(StateKey("g_r10RecoveryStartEquity"),g_r10RecoveryStartEquity);GlobalVariableSet(StateKey("g_r10RecoveryWorstEquity"),g_r10RecoveryWorstEquity);GlobalVariableSet(StateKey("R10RecoveryDebt"),R10RecoveryDebt());GlobalVariableSet(StateKey("R10RecoveryRemainingDebt"),R10RecoveryRemainingDebt());GlobalVariableSet(StateKey("R10RecoverySurplus"),R10RecoverySurplus());GlobalVariableSet(StateKey("R10RecoveryTarget"),R10RecoveryTarget());GlobalVariableSet(StateKey("EnableRecoveryStepMultiplier"),EnableRecoveryStepMultiplier?1.0:0.0);GlobalVariableSet(StateKey("RecoveryStepMultiplier"),RecoveryStepMultiplier);GlobalVariableSet(StateKey("RecoveryStepMax"),RecoveryStepMax);GlobalVariableSet(StateKey("PanelBackgroundX"),PanelBackgroundX);GlobalVariableSet(StateKey("PanelBackgroundY"),PanelBackgroundY);GlobalVariableSet(StateKey("PanelBackgroundHeight"),PanelBackgroundHeight);GlobalVariableSet(StateKey("PanelBottomY"),PanelBottomY);GlobalVariableSet(StateKey("PanelBottomX1"),PanelBottomX1);GlobalVariableSet(StateKey("PanelBottomX2"),PanelBottomX2);GlobalVariableSet(StateKey("PanelBottomX3"),PanelBottomX3);GlobalVariableSet(StateKey("PanelBottomX4"),PanelBottomX4);GlobalVariableSet(StateKey("g_panelMinProfit"),g_panelMinProfit);GlobalVariableSet(StateKey("g_panelMaxLots"),g_panelMaxLots);GlobalVariableSet(StateKey("g_panelInitialized"),g_panelInitialized?1.0:0.0);GlobalVariableSet(StateKey("g_r9HedgeActive"),g_r9HedgeActive?1.0:0.0);GlobalVariableSet(StateKey("g_r10LastAction"),(double)g_r10LastAction);GlobalVariableSet(StateKey("R9ProcessedCount"),ArraySize(g_r9ProcessedTickets));for(int i=0;i<ArraySize(g_r9ProcessedTickets);i++)GlobalVariableSet(StateKey("R9ProcessedTicket_"+IntegerToString(i)),g_r9ProcessedTickets[i]);GlobalVariableSet(StateKey("PANEL_MIN_PROFIT"),g_panelMinProfit);GlobalVariableSet(StateKey("CURRENT_LOTS"),DirectionLots(OP_BUY)+DirectionLots(OP_SELL));GlobalVariableSet(StateKey("MAX_ACCUM_LOTS"),g_panelMaxLots);GlobalVariableSet(StateKey("PANEL_NET_EXPOSURE"),ExposureLots());GlobalVariableSet(StateKey("PENDING_TOTAL"),CountDirectionPending(OP_BUY)+CountDirectionPending(OP_SELL));GlobalVariableSet(StateKey("BUY_PENDING"),CountDirectionPending(OP_BUY));GlobalVariableSet(StateKey("SELL_PENDING"),CountDirectionPending(OP_SELL));GlobalVariableSet(StateKey("BUY_COUNT"),CountDirectionPositions(OP_BUY));GlobalVariableSet(StateKey("SELL_COUNT"),CountDirectionPositions(OP_SELL));GlobalVariableSet(StateKey("BUY_LOTS"),DirectionLots(OP_BUY));GlobalVariableSet(StateKey("SELL_LOTS"),DirectionLots(OP_SELL));GlobalVariableSet(StateKey("BUY_PROFIT"),DirectionBasketProfit(OP_BUY));GlobalVariableSet(StateKey("SELL_PROFIT"),DirectionBasketProfit(OP_SELL));GlobalVariableSet(StateKey("TOTAL_PROFIT"),DirectionBasketProfit(OP_BUY)+DirectionBasketProfit(OP_SELL));GlobalVariableSet(StateKey("ACCUMULATED_PROFIT"),EAGOLDAccumulatedProfit());GlobalVariableSet(StateKey("BALANCE"),AccountBalance());GlobalVariableSet(StateKey("EQUITY"),AccountEquity());GlobalVariableSet(StateKey("CURRENT_DD"),MathMax(0.0,AccountBalance()-AccountEquity()));GlobalVariableSet(StateKey("MAX_INDIVIDUAL_LOT"),MathMax(0.0,MathMax(DirectionLots(OP_BUY),DirectionLots(OP_SELL))));GlobalVariableSet(StateKey("OPEN_POSITIONS"),CountDirectionPositions(OP_BUY)+CountDirectionPositions(OP_SELL));GlobalVariableSet(StateKey("BUY_RECOVERY_LEVEL"),RecoveryLevel(OP_BUY));GlobalVariableSet(StateKey("SELL_RECOVERY_LEVEL"),RecoveryLevel(OP_SELL));GlobalVariableSet(StateKey("RECOVERY_LEVEL"),MathMax(RecoveryLevel(OP_BUY),RecoveryLevel(OP_SELL)));GlobalVariableSet(StateKey("TIMESTAMP"),(double)TimeCurrent());}
 string TelemetryKey(string metric){return(TELEMETRY_PREFIX+Symbol()+"_"+IntegerToString(MagicNumber)+"_"+metric);}
 void UpdateExposureTelemetry(){double buyLots=DirectionLots(OP_BUY),sellLots=DirectionLots(OP_SELL),gross=buyLots+sellLots,net=MathAbs(buyLots-sellLots),maxIndividual=0.0;int openPositions=0;for(int i=OrdersTotal()-1;i>=0;i--){if(!OrderSelect(i,SELECT_BY_POS,MODE_TRADES))continue;if(!IsEAGOLDOrder())continue;int type=OrderType();if(type!=OP_BUY&&type!=OP_SELL)continue;openPositions++;if(OrderLots()>maxIndividual)maxIndividual=OrderLots();}double balance=AccountBalance(),equity=AccountEquity(),currentDD=MathMax(0.0,balance-equity),ddEquityPct=equity>0.0?(currentDD/equity)*100.0:0.0;int buyRecovery=RecoveryLevel(OP_BUY),sellRecovery=RecoveryLevel(OP_SELL),recoveryLevel=MathMax(buyRecovery,sellRecovery);GlobalVariableSet(TelemetryKey("BUY_EXPOSURE"),buyLots);GlobalVariableSet(TelemetryKey("SELL_EXPOSURE"),sellLots);GlobalVariableSet(TelemetryKey("GROSS_EXPOSURE"),gross);GlobalVariableSet(TelemetryKey("NET_EXPOSURE"),net);GlobalVariableSet(TelemetryKey("MAX_INDIVIDUAL_LOT"),maxIndividual);GlobalVariableSet(TelemetryKey("OPEN_POSITIONS"),openPositions);GlobalVariableSet(TelemetryKey("CURRENT_DD"),currentDD);GlobalVariableSet(TelemetryKey("DD_EQUITY_PCT"),ddEquityPct);GlobalVariableSet(TelemetryKey("BUY_RECOVERY_LEVEL"),buyRecovery);GlobalVariableSet(TelemetryKey("SELL_RECOVERY_LEVEL"),sellRecovery);GlobalVariableSet(TelemetryKey("RECOVERY_LEVEL"),recoveryLevel);GlobalVariableSet(TelemetryKey("BALANCE"),balance);GlobalVariableSet(TelemetryKey("EQUITY"),equity);GlobalVariableSet(TelemetryKey("R10_RECOVERY_DEBT"),R10RecoveryDebt());GlobalVariableSet(TelemetryKey("R10_RECOVERY_REMAINING"),R10RecoveryRemainingDebt());GlobalVariableSet(TelemetryKey("R10_RECOVERY_SURPLUS"),R10RecoverySurplus());GlobalVariableSet(TelemetryKey("R10_RECOVERY_TARGET"),R10RecoveryTarget());GlobalVariableSet(TelemetryKey("TIMESTAMP"),(double)TimeCurrent());}
@@ -230,6 +233,6 @@ bool R9HedgeFromActivatedTicket(int ticket){if(!EnableR9Hedge)return(false);if(!
 void Rule9DetectActivatedOrders(){if(!EnableR9Hedge)return;for(int i=OrdersTotal()-1;i>=0;i--){if(!OrderSelect(i,SELECT_BY_POS,MODE_TRADES))continue;if(!IsEAGOLDOrder())continue;int type=OrderType();if(type!=OP_BUY&&type!=OP_SELL)continue;int ticket=OrderTicket();if(R9Processed(ticket))continue;R9HedgeFromActivatedTicket(ticket);R9MarkProcessed(ticket);}double exposure=ExposureLots();if(exposure<R9ExposureTriggerLots)g_r9HedgeActive=false;}
 void BuyMachine(){if(BuyBasketTargetReached()&&DirectionLots(OP_BUY)>DirectionLots(OP_SELL))Rule10Reduce(OP_BUY);bool basketClosed=BuyBasketClose();if(basketClosed)RestartEmptyBasket(OP_BUY);BuySingleTakeProfit();BuyRecovery();}
 void SellMachine(){if(SellBasketTargetReached()&&DirectionLots(OP_SELL)>DirectionLots(OP_BUY))Rule10Reduce(OP_SELL);bool basketClosed=SellBasketClose();if(basketClosed)RestartEmptyBasket(OP_SELL);SellSingleTakeProfit();SellRecovery();}
-int OnInit(){ArrayResize(g_r9ProcessedTickets,0);g_r9HedgeActive=false;g_panelInitialized=false;g_panelMinProfit=0.0;g_panelMaxLots=0.0;g_r10LastAction=0;if(EnableR10RecoveryRealization){string r10Key=StateKey("g_r10RecoveryCycleActive");if(GlobalVariableCheck(r10Key)){g_r10RecoveryCycleActive=(GlobalVariableGet(r10Key)>0.5);g_r10RecoveryStartEquity=GlobalVariableGet(StateKey("g_r10RecoveryStartEquity"));g_r10RecoveryWorstEquity=GlobalVariableGet(StateKey("g_r10RecoveryWorstEquity"));}}g_r1LastDecision="DISABLED";g_r1LastReason="";g_r1LastDecisionTime=0;R9SeedExistingPositions();UpdateExposureTelemetry();PanelUpdate();PersistAllState();Print(EA_NAME," v0.106 initialized. R1 Admission Gate=",EnableR1AdmissionGate,"; R1 Broker=",EnableR1BrokerGuard," Lot=",EnableR1LotGuard," Margin=",EnableR1MarginGuard," TradePermission=",EnableR1TradePermissionGuard,"; R12 telemetry active; persistent Global Variables; R11 dynamic recovery step multiplier active=",EnableRecoveryStepMultiplier," multiplier=",DoubleToString(RecoveryStepMultiplier,2)," max=",DoubleToString(RecoveryStepMax,1),"; GLOBAL STOP TRAILING; ENGINE ACTION MARKERS active=",EnableEngineActionMarkers,".");CreateFirstOrdersIfFlat();UpdateExposureTelemetry();PanelUpdate();PersistAllState();return(INIT_SUCCEEDED);}
-void OnDeinit(const int reason){PersistAllState();PanelDelete();}
+int OnInit(){bool reloadPersistedConfig=(GlobalVariableCheck(ConfigKey("RELOAD_ON_REINIT"))&&GlobalVariableGet(ConfigKey("RELOAD_ON_REINIT"))>0.5);if(reloadPersistedConfig){LoadPersistedConfig();GlobalVariableSet(ConfigKey("RELOAD_ON_REINIT"),0.0);}else if(!GlobalVariableCheck(ConfigKey("CONFIG_INITIALIZED"))){PersistConfigState();}ArrayResize(g_r9ProcessedTickets,0);g_r9HedgeActive=false;g_panelInitialized=false;g_panelMinProfit=0.0;g_panelMaxLots=0.0;g_r10LastAction=0;if(EnableR10RecoveryRealization){string r10Key=StateKey("g_r10RecoveryCycleActive");if(GlobalVariableCheck(r10Key)){g_r10RecoveryCycleActive=(GlobalVariableGet(r10Key)>0.5);g_r10RecoveryStartEquity=GlobalVariableGet(StateKey("g_r10RecoveryStartEquity"));g_r10RecoveryWorstEquity=GlobalVariableGet(StateKey("g_r10RecoveryWorstEquity"));}}g_r1LastDecision="DISABLED";g_r1LastReason="";g_r1LastDecisionTime=0;R9SeedExistingPositions();UpdateExposureTelemetry();PanelUpdate();PersistAllState();Print(EA_NAME," v0.106 initialized. R1 Admission Gate=",EnableR1AdmissionGate,"; R1 Broker=",EnableR1BrokerGuard," Lot=",EnableR1LotGuard," Margin=",EnableR1MarginGuard," TradePermission=",EnableR1TradePermissionGuard,"; R12 telemetry active; persistent Global Variables; R11 dynamic recovery step multiplier active=",EnableRecoveryStepMultiplier," multiplier=",DoubleToString(RecoveryStepMultiplier,2)," max=",DoubleToString(RecoveryStepMax,1),"; GLOBAL STOP TRAILING; ENGINE ACTION MARKERS active=",EnableEngineActionMarkers,".");CreateFirstOrdersIfFlat();UpdateExposureTelemetry();PanelUpdate();PersistAllState();return(INIT_SUCCEEDED);}
+void OnDeinit(const int reason){PersistAllState();PersistConfigState();bool restore=(reason==REASON_CHARTCHANGE||reason==REASON_CLOSE||reason==REASON_RECOMPILE);GlobalVariableSet(ConfigKey("RELOAD_ON_REINIT"),restore?1.0:0.0);GlobalVariablesFlush();PanelDelete();}
 void OnTick(){R10RecoveryUpdateState();Rule9DetectActivatedOrders();BuyMachine();SellMachine();CreateFirstOrdersIfFlat();TrailAllStopOrders();UpdateExposureTelemetry();PanelUpdate();PersistAllState();}
