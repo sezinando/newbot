@@ -1,6 +1,6 @@
 #property strict
 #property indicator_chart_window
-#property version   "1.002"
+#property version   "1.003"
 #property description "EAGOLD - Basket / Profit / Exposure Monitor"
 
 input int    MagicNumber       = 1001;
@@ -12,6 +12,7 @@ input int    FontSize          = 10;
 input string PanelFont         = "Consolas";
 input bool   PersistExtremes   = true;
 input bool   ShowGM3Clock      = true;
+input bool   ShowServerClock   = true;
 
 string PREFIX = "EAGOLD_MON_";
 double g_minTotalProfit = 0.0;
@@ -162,6 +163,11 @@ string GM3Time()
    return(TimeToString(gm3,TIME_SECONDS));
 }
 
+string ServerTime()
+{
+   return(TimeToString(TimeCurrent(),TIME_SECONDS));
+}
+
 void UpdatePanel()
 {
    int buyCount,sellCount,buyPending,sellPending,totalPending;
@@ -188,9 +194,11 @@ void UpdatePanel()
    SetLabel(PREFIX+"PSELL",StringFormat("  SELL STOP     %12d",sellPending),row++);
    SetLabel(PREFIX+"SEP3","----------------------------------------",row++);
    SetLabel(PREFIX+"INFO","Min P/L e Max Lotes persistem por Symbol/Magic",row++);
-   SetLabel(PREFIX+"TIME",StringFormat("Atualizado: %s",TimeToString(TimeCurrent(),TIME_SECONDS)),row++);
+   SetLabel(PREFIX+"TIME",StringFormat("Atualizado: %s",ServerTime()),row++);
    if(ShowGM3Clock)
-      SetLabel(PREFIX+"GM3",StringFormat("GM-3:       %s",GM3Time()),row++);
+      SetLabel(PREFIX+"GM3",StringFormat("GM-3 %s",GM3Time()),row++);
+   if(ShowServerClock)
+      SetLabel(PREFIX+"SERVER",StringFormat("SERVER %s",ServerTime()),row++);
    ChartRedraw(0);
 }
 
